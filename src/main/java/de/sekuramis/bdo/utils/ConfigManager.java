@@ -61,4 +61,26 @@ public class ConfigManager
 
 		return token.toString();
 	}
+
+	public String getUsername()
+	{
+		Object username = configData.get("username");
+		if(username == null)
+		{
+			throw new IllegalStateException("username not found");
+		}
+
+		return username.toString();
+	}
+
+	public String getPassword()
+	{
+		Object password = configData.get("password");
+		if(password == null)
+		{
+			throw new IllegalStateException("password not found");
+		}
+
+		return password.toString();
+	}
 }

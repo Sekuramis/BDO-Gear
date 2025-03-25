@@ -2,6 +2,8 @@ package de.sekuramis.bdo.mariadb;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import de.sekuramis.bdo.utils.ConfigManager;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileInputStream;
@@ -18,14 +20,16 @@ public class HikariPool
 {
 	private static HikariDataSource hikariDataSource;
 	private final Map<HikariStatement, List<Object>> list = new HashMap();
+	@Getter
+	private static ConfigManager config = new ConfigManager("/opt/guilds/VERSUS/mysql.yml");
 
 	public HikariPool()
 	{
 		final HikariConfig config = new HikariConfig();
 		config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		config.setJdbcUrl("jdbc:mysql://localhost:3306/");
-		config.setUsername("gearbot");
-		config.setPassword("UU21QR5wMkk3(OBn");
+		config.setUsername(config.getUsername());
+		config.setPassword(config.getPassword());
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
